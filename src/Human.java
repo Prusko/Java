@@ -7,11 +7,11 @@ public class Human {
         System.out.println(this.name);
     }
 
-    public String getName(){
-        return this.name;    
+    public String getName() {
+        return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 

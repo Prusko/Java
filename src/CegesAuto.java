@@ -1,4 +1,7 @@
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +23,7 @@ public class CegesAuto {
         Feladat4();
         Feladat5();
         Feladat6();
+        Feladat7();
     }
     public static void Feladat2(){
         System.out.println("2. Feladat");
@@ -100,5 +104,29 @@ public class CegesAuto {
             }   
         }
         System.out.printf("Leghosszabb út: %d km, személy: %s", maxkm, maxid);
+    }
+    public static void Feladat7(){
+        System.out.println("7. Feladat");
+        System.out.print("Rendszám: ");
+        String rendszam = System.console().readLine();
+
+        try{
+            PrintWriter kiir = new PrintWriter(new FileWriter(rendszam + "_menetlevel.txt"));
+            for (Auto auto : autok) {
+                if (auto.rendszam.equals(rendszam)){
+                    if (!auto.hajtas){
+                        kiir.printf("%s\t%d. %s\t%d km\t",auto.id, auto.nap, auto.datum, auto.km);
+                    }
+                    if (auto.hajtas){
+                        kiir.printf("%d. %s\t%d km%n", auto.nap, auto.datum, auto.km, auto.rendszam);
+                    }
+               } 
+            }
+            kiir.close();
+            System.out.println("Menetlevél kész.");
+        } catch (IOException e){
+            System.out.println("Valami problema adodott");
+        }
+
     }
 }
