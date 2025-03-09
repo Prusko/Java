@@ -9,6 +9,8 @@ public class App {
         ember.setAge(Integer.parseInt(System.console().readLine()));
         System.out.println(ember.getName() + " - " + ember.getAge());
 
+        //itt a valtozas
+        
         String[] nevek = {"Atko", "David", "Prusko", "Dusty"};
         System.out.println(String.join("\t", nevek));
 
