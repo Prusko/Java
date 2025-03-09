@@ -2,6 +2,7 @@ public class Human {
     private String name;
     private int age;
     
+    /* Ez a metodus kiirja az ember nevet  */
     public void writeMyName(){
         System.out.println(this.name);
     }
