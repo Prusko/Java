@@ -1,5 +1,5 @@
 public class App {
-    public static void main(){
+    public static void main(String[] args){
         Human ember = new Human();
 
         System.out.println(ember.getName() != null ? "Van nev: "+ ember.getName() : "Nincs nev");
