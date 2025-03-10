@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,17 +7,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.io.BufferedReader;
 public class CegesAuto {
     static List<Auto> autok = new ArrayList<>();
     public static void main(String[] args) throws Exception {
-        BufferedReader beolvas = new BufferedReader(new FileReader("autok.txt"));
-        String olvas;
-        while ((olvas = beolvas.readLine()) != null){
-            String[]sor = olvas.split(" ");
-            autok.add(new Auto(Integer.parseInt(sor[0]), sor[1], sor[2], sor[3], Integer.parseInt(sor[4]), (sor[5].equals("1") ? true : false)));
+        try (BufferedReader beolvas = new BufferedReader(new FileReader("autok.txt"))) {
+            String olvas;
+            while ((olvas = beolvas.readLine()) != null){
+                String[]sor = olvas.split(" ");
+                autok.add(new Auto(Integer.parseInt(sor[0]), sor[1], sor[2], sor[3], Integer.parseInt(sor[4]), (sor[5].equals("1"))));
+            }
         }
-        beolvas.close();
 
         Feladat2();
         Feladat3();
@@ -65,7 +65,7 @@ public class CegesAuto {
             int minkm = 0;
             int i = 0;
             int maxkm = 0;
-            int osszkm = 0;
+            int osszkm;
             for (Auto auto : autok){
                 if (auto.rendszam.equals(rendszam)){
                     if (i == 0)
@@ -89,7 +89,7 @@ public class CegesAuto {
         int tav;
         for (String szemely : szemelyek){
             int kikm = 0;
-            int bekm = 0;
+            int bekm;
             for (Auto auto : autok){
                 if (auto.id.equals(szemely) && !auto.hajtas)
                     kikm = auto.km;
@@ -110,8 +110,7 @@ public class CegesAuto {
         System.out.print("Rendszám: ");
         String rendszam = System.console().readLine();
 
-        try{
-            PrintWriter kiir = new PrintWriter(new FileWriter(rendszam + "_menetlevel.txt"));
+        try (PrintWriter kiir = new PrintWriter(new FileWriter(rendszam + "_menetlevel.txt"))) {
             for (Auto auto : autok) {
                 if (auto.rendszam.equals(rendszam)){
                     if (!auto.hajtas){
@@ -120,13 +119,11 @@ public class CegesAuto {
                     if (auto.hajtas){
                         kiir.printf("%d. %s\t%d km%n", auto.nap, auto.datum, auto.km, auto.rendszam);
                     }
-               } 
-            }
-            kiir.close();
-            System.out.println("Menetlevél kész.");
-        } catch (IOException e){
-            System.out.println("Valami problema adodott");
-        }
-
+                }
+            } 
+        } catch (IOException e) {
+                    
+                }
+        System.out.println("Menetlevél kész.");
     }
 }
